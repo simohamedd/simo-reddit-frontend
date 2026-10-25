@@ -1,50 +1,111 @@
+.post-card {
+  display: flex;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.post-votes {
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.post-content {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 24px;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.post-user {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.post-user:hover {
+  color: var(--brand);
+}
+
 .post-title {
-  font-size: 28px;
-  font-weight: bold;
-  opacity: 1;
+  margin: 12px 0 10px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
 }
 
-.post-title:hover {
-  opacity: 0.6;
+.post-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  margin-bottom: 12px;
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.subreddit-text {
-  font-weight: bold;
+.post-text {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2F2E44;
+  overflow-wrap: anywhere;
 }
 
-.post-url {
-  color: black;
+.post-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
-.username{
-    color: gray;
+.comment-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
-.post-text{
-    margin-top: 10px;
+.login-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px dashed #D6D0F5;
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  font-weight: 500;
 }
 
-.post{
-    --post-line-color: #ccc;    
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    background-color: rgba(255,255,255,0.8);
-    color: #878A8C;
-    position: relative;
-    border-radius: 4px;
-    padding:5px;
+.login-prompt-actions {
+  display: flex;
+  gap: 8px;
 }
 
-.comment{    
-    --post-line-color: #ccc;    
-    border: 1px solid #ccc;    
-    margin-bottom: 10px;
-    overflow: hidden;
-    background-color: rgba(255,255,255,0.8);
-    color: #878A8C;
-    position: relative;
-    border-radius: 4px;
-    padding:5px;
+.comment-list {
+  margin-top: 20px;
+}
+
+@media (max-width: 575px) {
+  .post-content {
+    padding: 16px;
+  }
+
+  .post-title {
+    font-size: 22px;
+  }
 }

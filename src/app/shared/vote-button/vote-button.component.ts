@@ -36,6 +36,7 @@ export class VoteButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.updateVoteDetails();
   }
 
@@ -52,11 +53,15 @@ export class VoteButtonComponent implements OnInit {
   }
 
   private vote() {
+    if (!this.isLoggedIn) {
+      this.toastr.info('Log in to vote on posts');
+      return;
+    }
     this.votePayload.postId = this.post.id;
     this.voteService.vote(this.votePayload).subscribe(() => {
       this.updateVoteDetails();
     }, error => {
-      this.toastr.error(error.error.message);
+      this.toastr.error(error.error?.message || 'Could not register your vote');
       throwError(error);
     });
   }

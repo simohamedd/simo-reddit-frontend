@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHome, faLayerGroup, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/shared/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,10 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   faUser = faUser;
+  faHome = faHome;
+  faLayerGroup = faLayerGroup;
+  faPlus = faPlus;
+  faSignOutAlt = faSignOutAlt;
   isLoggedIn: boolean;
   username: string;
 

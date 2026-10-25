@@ -1,11 +1,11 @@
-<div class="sidebar">
-    <img src="assets/simo-banner.svg" alt="Simo Reddit">
-    <div style="text-align: center; font-size: 1em">Welcome to the Simo Reddit home page. Come here to
-        check in with your favorite subreddits.</div>
-    <div style="text-align: center">
-        <button class="btnCreatePost" (click)="goToCreatePost()">Create Post</button>
-    </div>
-    <div style="text-align: center">
-        <button class="btnCreateSubreddit" (click)="goToCreateSubreddit()">Create Subreddit</button>
+<div class="welcome s-card">
+    <img class="welcome-banner" src="assets/simo-banner.svg" alt="">
+    <div class="s-card-body">
+        <h3 class="s-card-title">Welcome to Simo Reddit</h3>
+        <p class="welcome-text">Your home for good conversations. Check in with your favourite communities and share
+            what's on your mind.</p>
+        <button class="s-btn s-btn-primary s-btn-block btnCreatePost" (click)="goToCreatePost()">Create post</button>
+        <button class="s-btn s-btn-outline s-btn-block btnCreateSubreddit" (click)="goToCreateSubreddit()">Create
+            community</button>
     </div>
 </div>

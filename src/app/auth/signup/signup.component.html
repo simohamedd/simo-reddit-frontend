@@ -1,55 +1,40 @@
-<div class="register-section">
-    <div class="row justify-content-center">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header" style="text-align: center">
-                    <h4>Register</h4>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="signupForm" (ngSubmit)="signup()">
-                        <div class="form-group row">
-                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
-                                Address</label>
-                            <div class="col-md-6">
-                                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
-                                    autofocus>
-                                <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
-                                    Please provide a valid email
-                                </span>                                    
-                            </div>
-                        </div>
- 
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">User Name</label>
-                            <div class="col-md-6">
-                                <input type="text" [formControlName]="'username'"class="form-control" required autofocus>
-                                <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
-                                    Please provide a valid username
-                                </span>                                 
-                            </div>
-                        </div>
- 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                            <div class="col-md-6">
-                                <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
-                                <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
-                                    Please provide a valid Password
-                                </span>  
-                            </div>
-                        </div>
- 
-                        <span class="col-md-6 offset-md-4">
-                            <button type="submit" class="sign-up">
-                                Sign Up
-                            </button>
-                            <span style="padding-left: 15px">Existing user? <a routerLink="/login">Log In</a></span>
-                        </span>
-                    </form>
-                </div>
+<div class="auth-page">
+    <div class="auth-card s-card">
+        <img class="auth-logo" src="assets/simo-logo.svg" alt="">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-subtitle">Join Simo Reddit and start sharing with your communities.</p>
+
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
+            <div class="s-field">
+                <label for="email_address" class="s-label">Email address</label>
+                <input type="email" [formControlName]="'email'" id="email_address" class="form-control" [class.is-invalid]="submitted && signupForm.get('email').invalid"
+                    name="email-address" autocomplete="email" required autofocus>
+                <span class="s-error" *ngIf="submitted && signupForm.get('email').invalid">
+                    Please enter a valid email address
+                </span>
             </div>
-        </div>
-        <div class="col-md-3"></div>
+
+            <div class="s-field">
+                <label for="signup_username" class="s-label">Username</label>
+                <input type="text" [formControlName]="'username'" id="signup_username" class="form-control" [class.is-invalid]="submitted && signupForm.get('username').invalid"
+                    autocomplete="username" required>
+                <span class="s-error" *ngIf="submitted && signupForm.get('username').invalid">
+                    Please choose a username
+                </span>
+            </div>
+
+            <div class="s-field">
+                <label for="password" class="s-label">Password</label>
+                <input type="password" [formControlName]="'password'" id="password" class="form-control" [class.is-invalid]="submitted && signupForm.get('password').invalid"
+                    name="password" autocomplete="new-password" required>
+                <span class="s-error" *ngIf="submitted && signupForm.get('password').invalid">
+                    Please choose a password
+                </span>
+            </div>
+
+            <button type="submit" class="s-btn s-btn-primary s-btn-block auth-submit">Sign up</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a routerLink="/login">Log in</a></p>
     </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { PostService } from '../post.service';
 import { PostModel } from '../post-model';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
+import { faCommentAlt, faLink, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
 })
 export class PostTileComponent implements OnInit {
 
-  faComments = faComments;
+  faCommentAlt = faCommentAlt;
+  faLink = faLink;
+  faExternalLinkAlt = faExternalLinkAlt;
   @Input() posts: PostModel[];
 
   constructor(private router: Router) { }
@@ -22,5 +24,13 @@ export class PostTileComponent implements OnInit {
 
   goToPost(id: number): void {
     this.router.navigateByUrl('/view-post/' + id);
+  }
+
+  domainOf(url: string): string {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '');
+    } catch (e) {
+      return url;
+    }
   }
 }

@@ -1,0 +1,49 @@
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.community-card {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.community-card:hover {
+  border-color: #D6D0F5;
+  box-shadow: var(--shadow-hover);
+}
+
+.community-card-avatar {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+.community-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.community-card-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.community-card-description {
+  margin: 4px 0 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.community-card-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+}

@@ -1,14 +1,12 @@
-<div class="reddit-body">
-  <div class="container">
-    <div class="row">
-      <hr />
-      <div class="col-md-9">
-        <app-post-tile [posts]="posts"></app-post-tile>
-      </div>
-      <div class="col-md-3">
-        <app-side-bar></app-side-bar>
-        <app-subreddit-side-bar></app-subreddit-side-bar>
-      </div>
-    </div>
+<div class="page">
+  <div class="layout">
+    <main>
+      <h1 class="page-heading">Home</h1>
+      <app-post-tile [posts]="posts"></app-post-tile>
+    </main>
+    <aside class="layout-aside">
+      <app-side-bar></app-side-bar>
+      <app-subreddit-side-bar></app-subreddit-side-bar>
+    </aside>
   </div>
 </div>

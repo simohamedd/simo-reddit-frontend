@@ -1,28 +1,43 @@
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="flex-grow-1">
-            <a aria-label="Home" class="logo" routerLink="/">
-                <img src="assets/simo-logo.svg" class="reddit-icon-svg" alt="Simo Reddit logo">
-                <span class="reddit-text">
-                    Simo Reddit
-                </span>
+<header class="site-header">
+    <nav class="site-nav">
+        <a aria-label="Simo Reddit home" class="brand" routerLink="/">
+            <img src="assets/simo-logo.svg" class="brand-logo" alt="">
+            <span class="brand-name">Simo Reddit</span>
+        </a>
+
+        <div class="nav-links">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link-item">
+                <fa-icon [icon]="faHome"></fa-icon><span class="nav-link-text">Home</span>
+            </a>
+            <a routerLink="/list-subreddits" routerLinkActive="active" class="nav-link-item">
+                <fa-icon [icon]="faLayerGroup"></fa-icon><span class="nav-link-text">Communities</span>
             </a>
         </div>
-        <div class="flex-grow-1 float-right">
-            <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button (click)="goToUserProfile()" ngbDropdownItem>Profile</button>
-                    <button (click)="logout()" ngbDropdownItem>Logout</button>
+
+        <div class="nav-actions">
+            <ng-container *ngIf="isLoggedIn; else guest">
+                <a routerLink="/create-post" class="s-btn s-btn-primary s-btn-sm create-btn">
+                    <fa-icon [icon]="faPlus"></fa-icon><span class="create-text">Create</span>
+                </a>
+                <div ngbDropdown placement="bottom-right" class="user-menu">
+                    <button class="user-toggle" id="userMenu" ngbDropdownToggle>
+                        <span class="s-avatar">{{username?.charAt(0)}}</span>
+                        <span class="user-name">{{username}}</span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="userMenu" class="user-dropdown">
+                        <button (click)="goToUserProfile()" ngbDropdownItem>
+                            <fa-icon [icon]="faUser"></fa-icon> Profile
+                        </button>
+                        <button (click)="logout()" ngbDropdownItem>
+                            <fa-icon [icon]="faSignOutAlt"></fa-icon> Log out
+                        </button>
+                    </div>
                 </div>
-                <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
-                    <span class="account-icon">{{username?.charAt(0) | uppercase}}</span>
-                    {{username}}
-                </button>
-            </div>            
-            <div *ngIf="!isLoggedIn">
-                <a routerLink="/sign-up" class="float-right sign-up mr-2">Sign up</a>
-                <a routerLink="/login" class="float-right login mr-2">Login</a>
-            </div>
+            </ng-container>
+            <ng-template #guest>
+                <a routerLink="/login" class="s-btn s-btn-ghost s-btn-sm">Log in</a>
+                <a routerLink="/sign-up" class="s-btn s-btn-primary s-btn-sm">Sign up</a>
+            </ng-template>
         </div>
     </nav>
 </header>

@@ -1,33 +1,457 @@
-/* You can add global styles to this file, and also import other style files */
-html{    
-  padding: 0;
-  height: 100%;  
-}
-body{
-  margin-top: 63px;
-  height: 100%; 
+/* Simo Reddit — global design tokens and shared building blocks */
+:root {
+  --brand: #5B3DF5;
+  --brand-hover: #4A2DE0;
+  --brand-soft: #EEEAFE;
+  --accent: #E64980;
+  --accent-soft: #FDE8F0;
+  --bg: #F5F4FB;
+  --surface: #FFFFFF;
+  --surface-muted: #FAF9FE;
+  --text: #1B1A2E;
+  --text-muted: #6B6A80;
+  --border: #E7E5F2;
+  --danger: #D9364C;
+  --success: #1F9D6B;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(27, 26, 46, .04), 0 4px 16px rgba(27, 26, 46, .05);
+  --shadow-hover: 0 2px 4px rgba(27, 26, 46, .06), 0 10px 28px rgba(91, 61, 245, .10);
+  --header-height: 64px;
 }
 
-input.ng-invalid.ng-touched {
-  border: 1px solid red;
+html {
+  height: 100%;
 }
 
-.login,
-.sign-up {
-  background-color: #0079D3;
-  border-color: #0079D3;
-  color: aliceblue;
-  fill: #0079D3;
-  border: 1px solid;
-  border-radius: 4px;
-  text-align: center;
-  letter-spacing: 1px;
+body {
+  min-height: 100%;
+  padding-top: var(--header-height);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--brand);
+}
+
+a:hover {
+  color: var(--brand-hover);
   text-decoration: none;
+}
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* Cards */
+.s-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.s-card-body {
+  padding: 20px;
+}
+
+.s-card-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.s-section-title {
+  margin: 28px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.s-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+
+.s-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 61, 245, .25);
+}
+
+.s-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.s-btn-primary {
+  background: var(--brand);
+  color: #FFF;
+}
+
+.s-btn-primary:hover:not(:disabled) {
+  background: var(--brand-hover);
+  color: #FFF;
+}
+
+.s-btn-outline {
+  background: var(--surface);
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.s-btn-outline:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.s-btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.s-btn-ghost:hover {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.s-btn-sm {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.s-btn-block {
+  width: 100%;
+}
+
+/* Forms */
+.s-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.s-field {
+  margin-bottom: 16px;
+}
+
+.form-control {
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  color: var(--text);
+  font-size: 15px;
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 110px;
+  padding-top: 10px;
+  resize: vertical;
+}
+
+.form-control:focus {
+  border-color: var(--brand);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(91, 61, 245, .15);
+}
+
+.form-control.is-invalid,
+.form-control.is-invalid:focus {
+  border-color: var(--danger);
+  background-image: none;
+}
+
+.s-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+/* Small pieces */
+.s-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .5px;
-  line-height: 24px;
+}
+
+.s-avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--accent));
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 700;
   text-transform: uppercase;
-  padding: 3px 16px;
-  opacity: 1;
+}
+
+.s-muted {
+  color: var(--text-muted);
+}
+
+.s-alert {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+.s-alert-error {
+  background: #FDECEE;
+  color: var(--danger);
+}
+
+.s-alert-success {
+  background: #E6F6EF;
+  color: var(--success);
+}
+
+.s-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Rich text inside posts */
+.s-richtext p:last-child {
+  margin-bottom: 0;
+}
+
+.s-richtext img {
+  max-width: 100%;
+}
+
+/* Toast notifications */
+.toast-container .ngx-toastr {
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-hover);
+}
+
+.toast-success {
+  background-color: var(--success);
+}
+
+.toast-error {
+  background-color: var(--danger);
+}
+
+/* Page layout: main column + sidebar */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.layout-aside {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.page-heading {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+.page-subheading {
+  margin: -10px 0 20px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 991px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .layout-aside {
+    position: static;
+  }
+}
+
+/* Login and sign-up */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  padding: 56px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+}
+
+.auth-logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+}
+
+.auth-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  text-align: center;
+}
+
+.auth-subtitle {
+  margin: 6px 0 24px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.auth-alert {
+  margin-bottom: 16px;
+}
+
+.auth-submit {
+  height: 44px;
+  margin-top: 8px;
+}
+
+.auth-switch {
+  margin: 20px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.auth-switch a {
+  font-weight: 600;
+}
+
+@media (max-width: 575px) {
+  .auth-page {
+    padding: 24px 12px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+}
+
+/* Comments (post page and profile) */
+.comment-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+
+.comment-item:first-child {
+  border-top: 0;
+}
+
+.comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.comment-meta a {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.comment-meta a:hover {
+  color: var(--brand);
+}
+
+.comment-text {
+  margin: 4px 0 0;
+  line-height: 1.55;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* Form pages (create post / create community) */
+.form-card {
+  padding: 24px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.s-optional {
+  margin-left: 4px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.s-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.guidelines-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.guidelines-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+
+.guidelines-list li:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 575px) {
+  .form-card {
+    padding: 18px;
+  }
 }

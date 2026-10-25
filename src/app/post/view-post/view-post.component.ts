@@ -6,6 +6,8 @@ import { throwError } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentPayload } from 'src/app/comment/comment.payload';
 import { CommentService } from 'src/app/comment/comment.service';
+import { AuthService } from 'src/app/auth/shared/auth.service';
+import { faCommentAlt, faLink } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-post',
@@ -19,10 +21,14 @@ export class ViewPostComponent implements OnInit {
   commentForm: FormGroup;
   commentPayload: CommentPayload;
   comments: CommentPayload[];
+  isLoggedIn: boolean;
+  faCommentAlt = faCommentAlt;
+  faLink = faLink;
 
   constructor(private postService: PostService, private activateRoute: ActivatedRoute,
-    private commentService: CommentService, private router: Router) {
+    private commentService: CommentService, private router: Router, private authService: AuthService) {
     this.postId = this.activateRoute.snapshot.params.id;
+    this.isLoggedIn = this.authService.isLoggedIn();
 
     this.commentForm = new FormGroup({
       text: new FormControl('', Validators.required)

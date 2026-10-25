@@ -32,8 +32,8 @@ export class CreatePostComponent implements OnInit {
     this.createPostForm = new FormGroup({
       postName: new FormControl('', Validators.required),
       subredditName: new FormControl('', Validators.required),
-      url: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
+      url: new FormControl(''),
+      description: new FormControl(''),
     });
     this.subredditService.getAllSubreddits().subscribe((data) => {
       this.subreddits = data;

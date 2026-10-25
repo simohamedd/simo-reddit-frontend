@@ -1,36 +1,44 @@
-<div class="container">
-    <div class="row">
-      <div class="create-subreddit-container">
-        <form class="post-form" [formGroup]="createSubredditForm" (ngSubmit)="createSubreddit()">
-          <div class="form-group">
-            <div class="create-subreddit-heading">Create Subreddit</div>
-            <hr />
-            <input type="text" [formControlName]="'title'" class="form-control" style="margin-top: 5px"
-              placeholder="Title">
-            <textarea type="text" [formControlName]="'description'" style="width: 100%; margin-top: 5px"
-              placeholder="Description"></textarea>
-            <div>
-              <div style="margin-top: 5px" class="float-right">
-                <button (click)="discard()" class="btnDiscard">Discard</button>
-                <button class="btnCreateSubreddit">Create</button>
-              </div>
-            </div>
+<div class="page">
+  <div class="layout">
+    <main>
+      <h1 class="page-heading">Create a community</h1>
+      <form class="form-card s-card" [formGroup]="createSubredditForm" (ngSubmit)="createSubreddit()">
+        <div class="s-field">
+          <label for="community_name" class="s-label">Name</label>
+          <div class="input-prefix">
+            <span class="input-prefix-text">s/</span>
+            <input id="community_name" type="text" [formControlName]="'title'" class="form-control"
+              placeholder="community-name" maxlength="50">
           </div>
-        </form>
-      </div>
-      <div class="col-md-3">
-        <div class="sidebar">
-          <h5 class="guidelines">Posting to Simo Reddit</h5>
-          <hr />
-          <ul>
+          <span class="s-hint">Community names can't be changed later.</span>
+        </div>
+
+        <div class="s-field">
+          <label for="community_description" class="s-label">Description</label>
+          <textarea id="community_description" [formControlName]="'description'" class="form-control"
+            placeholder="What is this community about?"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" (click)="discard()" class="s-btn s-btn-ghost btnDiscard">Discard</button>
+          <button type="submit" class="s-btn s-btn-primary btnCreateSubreddit"
+            [disabled]="createSubredditForm.invalid">Create community</button>
+        </div>
+      </form>
+    </main>
+
+    <aside class="layout-aside">
+      <div class="guidelines s-card">
+        <div class="s-card-body">
+          <h3 class="s-card-title">Good communities</h3>
+          <ol class="guidelines-list">
+            <li>Pick a clear, specific topic</li>
+            <li>Describe what belongs there</li>
+            <li>Be welcoming to newcomers</li>
             <li>Remember the human</li>
-            <hr />
-            <li>Behave like you would in real life</li>
-            <hr />
-            <li>Don't spam</li>
-            <hr />
-          </ul>
+          </ol>
         </div>
       </div>
-    </div>
+    </aside>
   </div>
+</div>

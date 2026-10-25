@@ -1,28 +1,39 @@
-<div class="container">
-  <div>
-    Welcome <b>{{name}}</b>.<br /> You have posted <b>{{postLength}}</b> time(s) and commented
-    <b>{{commentLength}}</b> time(s).
-    You can check your post and comment history below.
-  </div>
-  <hr />
-  <div>
-    Your Posts:
-  </div>
-  <app-post-tile [posts]="posts"></app-post-tile>
-  <hr />
-  <div>
-    Your Comments:
-  </div>
-  <div *ngFor="let comment of comments">
-    <div class="comment">
-      <div class="username">
-        <a routerLink="/user/comment.username">{{comment.userName}}</a>
+<div class="page">
+  <section class="profile-header s-card">
+    <span class="s-avatar profile-avatar">{{name?.charAt(0)}}</span>
+    <div class="profile-info">
+      <h1 class="profile-name">u/{{name}}</h1>
+      <div class="profile-stats">
+        <span><strong>{{postLength || 0}}</strong> {{postLength === 1 ? 'post' : 'posts'}}</span>
+        <span><strong>{{commentLength || 0}}</strong> {{commentLength === 1 ? 'comment' : 'comments'}}</span>
       </div>
-      <div>
-        <p>{{comment.duration}}</p>
-      </div>
-      <b>{{comment.text}}</b>
     </div>
-    <hr />
+  </section>
+
+  <div class="profile-columns">
+    <section>
+      <h2 class="s-section-title">Posts</h2>
+      <app-post-tile [posts]="posts"></app-post-tile>
+    </section>
+
+    <section>
+      <h2 class="s-section-title">Comments</h2>
+      <div class="s-card">
+        <div class="s-card-body">
+          <div class="comment-item" *ngFor="let comment of comments">
+            <span class="s-avatar">{{comment.userName?.charAt(0)}}</span>
+            <div class="comment-body">
+              <div class="comment-meta">
+                <a routerLink="/user-profile/{{comment.userName}}">u/{{comment.userName}}</a>
+                <span class="s-muted" *ngIf="comment.createdDate">· {{comment.createdDate * 1000 | date:'MMM d, y · h:mm a'}}</span>
+                <a class="comment-post-link" routerLink="/view-post/{{comment.postId}}">View post</a>
+              </div>
+              <p class="comment-text">{{comment.text}}</p>
+            </div>
+          </div>
+          <p class="s-empty profile-empty" *ngIf="comments && comments.length === 0">No comments yet.</p>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

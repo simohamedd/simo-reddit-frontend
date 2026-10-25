@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loginRequestPayload: LoginRequestPayload;
   registerSuccessMessage: string;
   isError: boolean;
+  submitted = false;
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute,
     private router: Router, private toastr: ToastrService) {
@@ -36,13 +37,17 @@ export class LoginComponent implements OnInit {
       .subscribe(params => {
         if (params.registered !== undefined && params.registered === 'true') {
           this.toastr.success('Signup Successful');
-          this.registerSuccessMessage = 'Please Check your inbox for activation email '
-            + 'activate your account before you Login!';
+          this.registerSuccessMessage = 'Almost there! Check your inbox for the activation email '
+            + 'and activate your account before you log in.';
         }
       });
   }
 
   login() {
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;
 

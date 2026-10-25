@@ -1,51 +1,75 @@
-<div class="container">
-  <div class="row">
-    <hr />
-    <div class="col-md-9">
-      <div class="row post">
-        <div class="col-md-1">
-          <app-vote-button [post]="post"></app-vote-button>
-        </div>
-        <div class="col-md-11">
-          <span>
-            <span class="subreddit-text"><a class="post-url" href="">{{post.subredditName}}</a></span>
-            <span> . Posted
-              <span> {{post.duration}} </span>
-              by              
-              <a class="username" href="">{{post.userName}}</a>
+<div class="page">
+  <div class="layout">
+    <main>
+      <article class="post-card s-card" *ngIf="post">
+        <app-vote-button [post]="post" class="post-votes"></app-vote-button>
+
+        <div class="post-content">
+          <div class="post-meta">
+            <span class="s-chip">s/{{post.subredditName}}</span>
+            <span>
+              Posted by <a class="post-user" routerLink="/user-profile/{{post.userName}}">u/{{post.userName}}</a>
+              · {{post.duration}}
             </span>
-          </span>
-          <hr />
-          <a routerLink="post.url" class="post-title">{{post.postName}}</a>
-          <div>
-            <p class="post-text" [innerHtml]="post.description"></p>
           </div>
-          <div class="post-comment">
-            <form [formGroup]="commentForm" (ngSubmit)="postComment()">
-              <div class="form-group">
-                <textarea class="form-control" [formControlName]="'text'" placeholder="Your Thoughts?"></textarea>
-              </div>
-              <button type="submit" class="login float-right">Comment</button>
-            </form>
-          </div>
-          <div style="margin-top: 60px;" *ngFor="let comment of comments">
-            <div class="comment">
-              <div class="username">
-                <a routerLink="/user/comment.username">{{comment.userName}}</a>
-              </div>
-              <div>
-                <p>{{comment.duration}}</p>
-              </div>
-              <b>{{comment.text}}</b>
-            </div>
-            <hr />
+
+          <h1 class="post-title">{{post.postName}}</h1>
+
+          <a *ngIf="post.url" class="post-link" href="{{post.url}}" target="_blank" rel="noopener noreferrer">
+            <fa-icon [icon]="faLink"></fa-icon>{{post.url}}
+          </a>
+
+          <div class="post-text s-richtext" *ngIf="post.description" [innerHtml]="post.description"></div>
+
+          <div class="post-stats">
+            <fa-icon [icon]="faCommentAlt"></fa-icon>
+            {{comments?.length || 0}} {{comments?.length === 1 ? 'comment' : 'comments'}}
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-3">
+      </article>
+
+      <section class="discussion s-card">
+        <div class="s-card-body">
+          <form *ngIf="isLoggedIn; else loginToComment" class="comment-form" [formGroup]="commentForm"
+            (ngSubmit)="postComment()">
+            <label for="comment_text" class="s-label">Join the discussion</label>
+            <textarea id="comment_text" class="form-control" [formControlName]="'text'"
+              placeholder="What are your thoughts?"></textarea>
+            <div class="comment-form-actions">
+              <button type="submit" class="s-btn s-btn-primary s-btn-sm comment-submit"
+                [disabled]="commentForm.invalid">Comment</button>
+            </div>
+          </form>
+          <ng-template #loginToComment>
+            <div class="login-prompt">
+              <span>Log in or sign up to leave a comment.</span>
+              <span class="login-prompt-actions">
+                <a routerLink="/login" class="s-btn s-btn-outline s-btn-sm">Log in</a>
+                <a routerLink="/sign-up" class="s-btn s-btn-primary s-btn-sm">Sign up</a>
+              </span>
+            </div>
+          </ng-template>
+
+          <div class="comment-list">
+            <div class="comment-item" *ngFor="let comment of comments">
+              <span class="s-avatar">{{comment.userName?.charAt(0)}}</span>
+              <div class="comment-body">
+                <div class="comment-meta">
+                  <a routerLink="/user-profile/{{comment.userName}}">u/{{comment.userName}}</a>
+                  <span class="s-muted" *ngIf="comment.createdDate">· {{comment.createdDate * 1000 | date:'MMM d, y · h:mm a'}}</span>
+                </div>
+                <p class="comment-text">{{comment.text}}</p>
+              </div>
+            </div>
+            <p class="s-empty" *ngIf="comments && comments.length === 0">No comments yet. Start the conversation!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="layout-aside">
       <app-side-bar></app-side-bar>
       <app-subreddit-side-bar></app-subreddit-side-bar>
-    </div>
+    </aside>
   </div>
 </div>

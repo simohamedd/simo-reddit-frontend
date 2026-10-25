@@ -1,101 +1,141 @@
-header{
-    border-radius: 1px solid;
-}
-.reddit-icon-svg{
-    height: 50px;
-    padding: 8px 8px 8px 0;
-    width: 50px;
-}
-
-.reddit-text{        
-    font-weight: 700;
-    height: 50px;
-    width: 50px;    
-}
-.logo{
-    text-decoration: none;
+.site-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    height: var(--header-height);
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, .88);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
 }
 
-.login, .sign-up{    
-    background-color: transparent;
-    border-color: #0079D3;
-    color: #0079D3;
-    fill: #0079D3;
-    border: 1px solid;
-    border-radius: 4px;
-    box-sizing: border-box;
-    text-align: center;
-    letter-spacing: 1px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    opacity: 1;  
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 1120px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
-.sign-up{
-    background-color: #0079D3;
-    border-color: #0079D3;
-    color: aliceblue;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
 }
 
-.sign-up:hover{
-    opacity: 0.6;
+.brand:hover {
+    color: var(--text);
 }
 
-.userdetails{    
-    background-color: transparent;
-    border-color: #0079D3;
-    color: #0079D3;
-    fill: #0079D3;
-    border: 1px solid;
-    border-radius: 4px;
-    box-sizing: border-box;
-    text-align: center;
-    letter-spacing: 1px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    opacity: 1;
-    border: 0px;
+.brand-logo {
+    width: 36px;
+    height: 36px;
 }
 
-.userdetails:hover{
-    border: 1px solid;
+.brand-name {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -.02em;
 }
 
-.dropdown-item{
-    background-color: #f8f9fa;
+.nav-links {
+    display: flex;
+    flex: 1;
+    gap: 4px;
+}
+
+.nav-link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-link-item:hover,
+.nav-link-item.active {
+    background: var(--brand-soft);
+    color: var(--brand);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 10px 0 4px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-toggle:hover,
+.user-toggle:focus {
+    border-color: var(--brand);
+    outline: none;
+}
+
+.user-dropdown {
+    min-width: 180px;
+    margin-top: 8px;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hover);
+}
+
+.user-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text);
     font-size: 14px;
     font-weight: 500;
-    line-height: 18px;
-    display: inline-block;
-    vertical-align: middle;
 }
 
-.dropdown-item:hover{
-    background-color: #0079D3;
+.user-dropdown .dropdown-item:hover,
+.user-dropdown .dropdown-item:active {
+    background: var(--brand-soft);
+    color: var(--brand);
 }
 
-.dropdown-menu{
-    background-color: #f8f9fa;
-}
+@media (max-width: 767px) {
+    .site-nav {
+        gap: 12px;
+    }
 
-.account-icon{
-    background-color: #5B3DF5;
-    border-radius: 50%;
-    color: #fff;
-    display: inline-block;
-    float: left;
-    height: 24px;
-    line-height: 24px;
-    margin-right: 5px;
-    width: 24px;
+    .brand-name,
+    .nav-link-text,
+    .create-text,
+    .user-name {
+        display: none;
+    }
+
+    .nav-link-item {
+        padding: 0 10px;
+    }
+
+    .user-toggle {
+        padding: 0 4px;
+    }
 }

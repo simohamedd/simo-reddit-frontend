@@ -1,16 +1,29 @@
-<div class="container">
-    <div class="row">
-      <hr />
-      <div class="col-md-9">
-        <h2>List of Subreddits</h2>
-        <ul>
-          <li *ngFor="let subreddit of subreddits">
-              <a routerLink="/view-subreddit/{{subreddit.id}}">{{subreddit.name}}</a>
-          </li>
-        </ul>
+<div class="page">
+  <div class="layout">
+    <main>
+      <h1 class="page-heading">Communities</h1>
+      <p class="page-subheading">Find a place for every conversation.</p>
+
+      <div class="community-grid">
+        <div class="community-card s-card" *ngFor="let subreddit of subreddits">
+          <span class="s-avatar community-card-avatar">{{subreddit.name?.charAt(0)}}</span>
+          <div class="community-card-body">
+            <h2 class="community-card-name">s/{{subreddit.name}}</h2>
+            <p class="community-card-description">{{subreddit.description}}</p>
+            <span class="community-card-count">
+              {{subreddit.numberOfPosts || 0}} {{subreddit.numberOfPosts === 1 ? 'post' : 'posts'}}
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3">
-        <app-side-bar></app-side-bar>
+
+      <div class="s-card s-empty" *ngIf="subreddits && subreddits.length === 0">
+        No communities yet. <a routerLink="/create-subreddit">Create the first one</a>.
       </div>
-    </div>
+    </main>
+
+    <aside class="layout-aside">
+      <app-side-bar></app-side-bar>
+    </aside>
   </div>
+</div>

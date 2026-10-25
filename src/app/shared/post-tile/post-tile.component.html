@@ -1,29 +1,38 @@
-<!-- Display Posts-->
-<div class="row post" *ngFor="let post of posts">
-  <app-vote-button [post]="post"></app-vote-button>
-  <!-- Section to Display Post Information-->
-  <div class="col-md-11">
-    <span class="subreddit-info">
-      <span class="subreddit-text"><a class="posturl" routerLink="">{{post.subredditName}}</a></span>
-      <span> . Posted by <a class="username" routerLink="/user/{{post.userName}}">{{post.userName}}</a></span>
-      <span> . {{post.duration}}</span>
-    </span>
-    <hr />
-    <div class="post-title">
-      <a class="postname" href="{{post.url}}">{{post.postName}}</a>
+<article class="pt-card s-card" *ngFor="let post of posts">
+  <app-vote-button [post]="post" class="pt-votes"></app-vote-button>
+
+  <div class="pt-content">
+    <div class="pt-meta">
+      <span class="s-chip">s/{{post.subredditName}}</span>
+      <span class="pt-meta-text">
+        Posted by <a class="pt-user" routerLink="/user-profile/{{post.userName}}">u/{{post.userName}}</a>
+        · {{post.duration}}
+      </span>
     </div>
-    <div>
-      <p class="post-text" [innerHtml]="post.description"></p>
-    </div>
-    <hr />
-    <span>
-      <a class="btnCommments" role="button">
-        <fa-icon [icon]="faComments"></fa-icon>
-        Comments({{post.commentCount}})
-      </a>
-      <button class="login" (click)="goToPost(post.id)">
-        Read Post
+
+    <h2 class="pt-title">
+      <a routerLink="/view-post/{{post.id}}">{{post.postName}}</a>
+    </h2>
+
+    <div class="pt-text s-richtext" *ngIf="post.description" [innerHtml]="post.description"></div>
+
+    <a *ngIf="post.url" class="pt-link" href="{{post.url}}" target="_blank" rel="noopener noreferrer">
+      <fa-icon [icon]="faLink"></fa-icon>{{domainOf(post.url)}}
+      <fa-icon [icon]="faExternalLinkAlt" class="pt-link-out"></fa-icon>
+    </a>
+
+    <div class="pt-actions">
+      <button class="s-btn s-btn-ghost s-btn-sm pt-comments" (click)="goToPost(post.id)">
+        <fa-icon [icon]="faCommentAlt"></fa-icon>
+        {{post.commentCount}} {{post.commentCount === 1 ? 'comment' : 'comments'}}
       </button>
-    </span>
+      <button class="s-btn s-btn-outline s-btn-sm pt-open" (click)="goToPost(post.id)">
+        Open post
+      </button>
+    </div>
   </div>
+</article>
+
+<div class="s-card s-empty" *ngIf="posts && posts.length === 0">
+  No posts yet. Be the first to share something!
 </div>

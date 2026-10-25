@@ -22,11 +22,11 @@ export class UserProfileComponent implements OnInit {
     this.name = this.activatedRoute.snapshot.params.name;
 
     this.postService.getAllPostsByUser(this.name).subscribe(data => {
-      this.posts = data;
+      this.posts = data.sort((a, b) => b.id - a.id);
       this.postLength = data.length;
     });
     this.commentService.getAllCommentsByUser(this.name).subscribe(data => {
-      this.comments = data;
+      this.comments = data.sort((a, b) => b.createdDate - a.createdDate);
       this.commentLength = data.length;
     });
   }

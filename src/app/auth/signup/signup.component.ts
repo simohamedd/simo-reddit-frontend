@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
 
   signupRequestPayload: SignupRequestPayload;
   signupForm: FormGroup;
+  submitted = false;
 
   constructor(private authService: AuthService, private router: Router,
     private toastr: ToastrService) {
@@ -33,6 +34,10 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    this.submitted = true;
+    if (this.signupForm.invalid) {
+      return;
+    }
     this.signupRequestPayload.email = this.signupForm.get('email').value;
     this.signupRequestPayload.username = this.signupForm.get('username').value;
     this.signupRequestPayload.password = this.signupForm.get('password').value;

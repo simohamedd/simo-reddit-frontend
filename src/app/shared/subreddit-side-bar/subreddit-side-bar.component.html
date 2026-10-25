@@ -1,11 +1,16 @@
-<div class="sidebar-view-subreddit">
-    <div style="color: black; font-weight: bold">Browse Subreddits</div>
-    <hr />
-    <span *ngFor="let subreddit of subreddits">
-        <span class="subreddit-text"><a href="/view-subreddit/{{subreddit.id}}">{{subreddit.name}}</a></span>
-        <hr />
-    </span>
-    <div style="text-align: center" *ngIf="displayViewAll">
-        <a style="font-weight: bold" routerLink="/list-subreddits">View All</a>
+<div class="communities s-card">
+    <div class="s-card-body">
+        <h3 class="s-card-title">Communities</h3>
+        <ul class="community-list">
+            <li *ngFor="let subreddit of subreddits">
+                <a class="community" routerLink="/list-subreddits">
+                    <span class="s-avatar community-avatar">{{subreddit.name?.charAt(0)}}</span>
+                    <span class="community-name">s/{{subreddit.name}}</span>
+                    <span class="community-count" *ngIf="subreddit.numberOfPosts">{{subreddit.numberOfPosts}}</span>
+                </a>
+            </li>
+        </ul>
+        <p class="s-muted community-empty" *ngIf="subreddits.length === 0">No communities yet.</p>
+        <a class="view-all" routerLink="/list-subreddits">View all communities</a>
     </div>
 </div>
