@@ -24,6 +24,7 @@
     "@tinymce/tinymce-angular": "^3.5.0",
     "bootstrap": "^4.4.1",
     "rxjs": "~6.5.5",
+    "tinymce": "^5.10.9",
     "tslib": "^1.11.1",
     "zone.js": "~0.10.3"
   },

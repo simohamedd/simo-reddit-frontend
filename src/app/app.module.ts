@@ -21,7 +21,7 @@ import { SubredditSideBarComponent } from './shared/subreddit-side-bar/subreddit
 import { CreateSubredditComponent } from './subreddit/create-subreddit/create-subreddit.component';
 import { CreatePostComponent } from './post/create-post/create-post.component';
 import { ListSubredditsComponent } from './subreddit/list-subreddits/list-subreddits.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { ViewPostComponent } from './post/view-post/view-post.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './auth/user-profile/user-profile.component';
@@ -61,7 +61,8 @@ import { UserProfileComponent } from './auth/user-profile/user-profile.component
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],
   bootstrap: [AppComponent]
 })
